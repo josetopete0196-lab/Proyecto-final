@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attachments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        $table->id();
+        $table->morphs('attachable');            // attachable_id + attachable_type
+        $table->string('original_name');
+        $table->string('path');
+        $table->string('mime_type')->nullable();
+        $table->unsignedBigInteger('size')->default(0);
+        $table->timestamps();
         });
     }
 

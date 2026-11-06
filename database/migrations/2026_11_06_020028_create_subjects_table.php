@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('name');
+            $table->string('teacher')->nullable();
+            $table->string('color', 7)->default('#3b82f6');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
